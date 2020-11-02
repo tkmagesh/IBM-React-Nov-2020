@@ -107,5 +107,12 @@ Function invoked using the 'new' keyword
 Convention : the constructor function name should start with an uppercase
 
 
+Prototypal Inheritance
+===================================
 
+One object (prototype) acts as the base object for a family of objects
+
+Attributes are resolved using 'prototype hopping'
+
+'prototype hopping' happens ONLY when the attribute is READ
 
