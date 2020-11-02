@@ -61,3 +61,39 @@ add([10,'20','abc'],[30,[40,50]])
 add(function(){ return [10,'20','abc'];},function(){ return [30,[40,50]]; })
 add([function(){ return [10,'20','abc'];},function(){ return [30,[40,50]]; }])
 add(function(){ return [function(){ return [10,'20','abc'];},function(){ return [30,[40,50]]; }];})
+
+Closures
+================================================================
+
+ClickTracker.html
+    A button 'Track'
+    Everytime the 'Track' button is clicked, the page has to count the number of times the button is clicked and display to the user
+
+
+Assignment-2
+    (THIS DOESNOT INVOLE HTML, BUTTON, CLICK EVENT HANDLER ETC)
+    
+    var spinner = /*................................*/
+    //spinner must be an object with two methods - up() & down()
+
+    spinner.up() // => 1
+    spinner.up() // => 2
+    spinner.up() // => 3
+    spinner.up() // => 4
+
+    spinner.down() // => 3
+    spinner.down() // => 2
+    spinner.down() // => 1
+    spinner.down() // => 0
+    spinner.down() // => -1
+
+    Important :
+        There should NO other way by which the outcome of up & down methods can be influenced
+
+        For ex:
+        The following SHOULD NOT BE POSSIBLE
+            spinner.count = 10000
+            spinner.up() // => 10001
+
+            window.count = 10000
+            spinner.up() // => 10001
