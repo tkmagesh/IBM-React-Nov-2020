@@ -1,0 +1,63 @@
+JavaScript
+============================================================================
+Line Oriented
+Procedural
+Object Based
+Object Oriented (JS)
+Functional (JS)
+    Function is a first class citizen
+        (Functions can be treated like data / object )
+        functions can be created like objects
+        functions can have attributes (like objects)
+        functions can have methods (like objects)
+        Support for Higher Order Functions
+            functions can be passed as arguments to other functions
+            functions can be returned from other functions
+
+
+static
+dynamic (JS)
+
+strongly typed
+loosely typed (JS)
+
+JavaScript is a functional, dynamic and loosely typed language
+
+
+Function invocation Patterns
+    - As a function
+        this => global (window)
+
+    - As a method of an object
+        this => object
+
+    - Using the 'call' method of the function
+    - Using the 'apply' method of the function
+    - As an 'Immediately invoked function expression' (IIFE)
+    - Using the 'new' keyword
+
+this -> Invocation context
+    It does not matter WHERE the function is. What matters is how the function is invoked.
+
+arguments
+    - implicit value available in all functions
+    - array like object containing all the argument values passed to the function
+        arguments.length -> the # of arguments passed to the function
+        arguments[0], arguments[1] .....
+
+
+
+IBM-React-Nov-2020
+    Assignment-1
+
+
+add()
+add(10)
+add(10,20,30,40,50)
+add(10,'20',30,40,50)
+add(10,'20','abc',30,40,50)
+add([10,'20','abc'],[30,40,50])
+add([10,'20','abc'],[30,[40,50]])
+add(function(){ return [10,'20','abc'];},function(){ return [30,[40,50]]; })
+add([function(){ return [10,'20','abc'];},function(){ return [30,[40,50]]; }])
+add(function(){ return [function(){ return [10,'20','abc'];},function(){ return [30,[40,50]]; }];})
