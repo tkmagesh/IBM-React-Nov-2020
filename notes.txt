@@ -97,3 +97,5 @@ Assignment-2
 
             window.count = 10000
             spinner.up() // => 10001
+
+    
