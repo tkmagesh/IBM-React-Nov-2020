@@ -99,3 +99,13 @@ Assignment-2
             spinner.up() // => 10001
 
     
+Constructor functions
+===============================
+Function invoked using the 'new' keyword
+    1. this -> new object
+    2. this -> returned by default
+Convention : the constructor function name should start with an uppercase
+
+
+
+
