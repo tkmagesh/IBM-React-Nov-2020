@@ -11,3 +11,16 @@ function Employee(id, name, salary) {
 
 var emp = new Employee(100, 'Magesh', 10000)
 emp.display();
+
+
+function Spinner(){
+    var counter = 0;
+
+    this.up = function(){
+        return ++counter;
+    }
+
+    this.down = function(){
+        return --counter;
+    }
+}
