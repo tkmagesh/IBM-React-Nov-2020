@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>React-Intro</title>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script src="babel.min.js"></script>
+
+    <script type="text/babel">
+        //(function(){
+            let count = 0;
+            function onDocumentLoad(){
+                let btnRender = document.getElementById('btnRender');
+                btnRender.addEventListener('click',onBtnRenderClick);
+            }
+            function onBtnRenderClick(){
+                ++count;
+                const appEle = (
+                    <div>
+                        <h1>React.js!</h1>
+                        <hr/>
+                        <div>
+                            <span>Counter : </span>
+                            <span>{count}</span>
+                        </div>
+                        <section>
+                            <h3>Introduction</h3>
+                            <p>Duis sint id cupidatat officia mollit est. Excepteur qui Lorem aliquip id officia esse esse pariatur velit ea nulla. Lorem quis sint labore voluptate sunt est voluptate voluptate in. Exercitation do in consectetur nostrud laborum in aliqua.</p>
+                            <p>Ut occaecat et ad veniam excepteur dolor. Consequat voluptate velit minim fugiat nostrud sint aliqua voluptate ad adipisicing esse proident. Proident excepteur ipsum do ex nisi nisi. Nostrud elit dolore nisi ut voluptate elit exercitation sint velit quis ea Lorem mollit. Id nisi adipisicing dolore ut. Minim elit sit non aliqua consequat reprehenderit aliquip aliqua magna mollit anim. Eu ipsum qui dolore exercitation adipisicing ad nulla nulla duis laboris dolore consequat aliqua.</p>
+                            <p>Sit ea incididunt aliquip Lorem dolore commodo id ad. Voluptate aliqua ut excepteur occaecat minim fugiat quis occaecat sint eu irure exercitation nulla. Ea laboris excepteur culpa consequat voluptate ullamco nulla excepteur dolore enim dolore dolor incididunt voluptate. Fugiat quis labore incididunt deserunt est enim tempor officia in cupidatat. Do dolore minim do id quis magna amet sit esse enim consequat exercitation.</p>
+                        </section>
+                        <section>
+                            <h3>Advantages</h3>
+                            <ol>
+                                <li>Declarative</li>
+                                <li>Efficient</li>
+                            </ol>
+                        </section>
+                    </div>
+                );
+
+                ReactDOM.render(appEle, document.getElementById('root'));
+            }
+            window.addEventListener('load', onDocumentLoad);
+        //})();
+    </script>
+</head>
+<body>
+    <input type="button" value="Render" id="btnRender">
+    <div id="root"></div>
+</body>
+</html>

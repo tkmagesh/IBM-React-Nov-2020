@@ -17,12 +17,16 @@
             function onBtnRenderClick(){
                 ++count;
                 //using actual DOM
-                document.getElementById('spanCounter').innerText = count;
+                //document.getElementById('spanCounter').innerText = count;
 
                 //using virtual DOM
                 const appEle = React.createElement('div', null, 
                     React.createElement('h1', null, 'React.js!'), 
                     React.createElement('hr'),
+                    React.createElement('div', null, 
+                        React.createElement('span',  null, 'Counter : '),
+                        React.createElement('span', null, count)
+                    ),
                     React.createElement('section', null, 
                         React.createElement('h3', null, 'Introduction'),
                         React.createElement('p', null, 'Dolore nulla velit cupidatat occaecat sint dolor excepteur qui ipsum voluptate aliquip. Id sunt irure culpa et et. Cillum quis aliqua sint aliquip ea. Consequat cupidatat et deserunt laboris ex aute occaecat adipisicing. Enim veniam irure cillum velit sint do sunt deserunt anim fugiat. Amet aliqua cupidatat incididunt amet sit sunt. Laboris sit exercitation amet ea occaecat ea dolore pariatur sunt dolore.'),
@@ -46,10 +50,6 @@
 </head>
 <body>
     <input type="button" value="Render" id="btnRender">
-    <div>
-        <span>Counter :</span>
-        <span id="spanCounter">0</span>
-    </div>
     <div id="root"></div>
 </body>
 </html>
