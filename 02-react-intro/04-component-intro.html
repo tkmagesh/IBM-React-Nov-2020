@@ -29,7 +29,7 @@
             
             onGreetClick = () => {
                 const { userName } = this.state;
-                const greetMessage = `Hi ${userName}!, Have a nice day!`;
+                const greetMessage = `Hi ${userName}!, ${this.props.template}`;
                 this.setState({ message : greetMessage });
             }
 
@@ -49,7 +49,10 @@
         }
 
         ReactDOM.render(
-            <Greeter/>, 
+            <div>
+                <Greeter template={'Have a nice day!'}/>
+                <Greeter template={'Have a good day!'}/>
+            </div>, 
         document.getElementById('root'))
     </script>
 </head>
