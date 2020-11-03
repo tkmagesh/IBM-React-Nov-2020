@@ -164,3 +164,7 @@ JSX
     All open tags must have the corresponding close tag
     Use 'className' instead of 'class'
     Use 'htmlFor' instead of 'for'
+
+Assignment - 3
+    3-Nov 2:50PM
+
