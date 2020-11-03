@@ -44,21 +44,18 @@
                     <div>
                         <h1>Salary Calculator</h1>
                         <hr/>
-                        <div className="field">
-                            <label htmlFor="">Basic :</label>
-                            <input type="number" 
-                                onChange={ evt => this.setState({ basic : parseInt(evt.target.value)})}/>
-                        </div>
-                        <div className="field">
-                            <label htmlFor="">HRA :</label>
-                            <input type="number" 
-                                onChange={ evt => this.setState({ hra : parseInt(evt.target.value)})}/>
-                        </div>
-                        <div className="field">
-                            <label htmlFor="">DA :</label>
-                            <input type="number" 
-                                onChange={ evt => this.setState({ da : parseInt(evt.target.value)})}/>
-                        </div>
+                        <SalaryCalculatorInput
+                            labelText= "Basic :"
+                            onValueChange= { value => this.setState({basic : value }) }
+                        />
+                        <SalaryCalculatorInput
+                            labelText= "HRA :"
+                            onValueChange= { value => this.setState({hra : value }) }
+                        />
+                        <SalaryCalculatorInput
+                            labelText= "DA :"
+                            onValueChange= { value => this.setState({da : value }) }
+                        />
                         <div className="field">
                             <label htmlFor="">Tax :</label>
                             <input type="range" min="0" max="30" 
@@ -73,10 +70,32 @@
             }
         }
 
+        class SalaryCalculatorInput extends React.Component{
+            render(){
+                const { labelText, onValueChange } = this.props;
+                return(
+                    <div className="field">
+                        <label htmlFor="">{labelText}</label>
+                        <input type="number" 
+                            onChange={ evt => onValueChange(parseInt(evt.target.value))}/>
+                    </div>
+                )
+            }
+        }
+
         class SalaryCalculatorResult extends React.Component{
             render(){
                 const { data } = this.props,
                     { basic, hra, da, tax, salary } = data;
+                /*
+                const data = this.props.data,
+                    basic = data.basic,
+                    hra = data.hra,
+                    da = data.da,
+                    tax = data.tax,
+                    salary = data.salary; 
+                */
+
                 return(
                     <div className="field">
                         <table>
