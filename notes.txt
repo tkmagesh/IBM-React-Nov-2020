@@ -138,3 +138,29 @@ ES6 (ESNext, ES2015)
 12. Class
 
 http://es6-features.org
+
+
+React
+    - A library for creating UI for the browser
+    - Presentation + Data + User Interaction
+
+User Interacts -> Model Changes -> Presentation Updated
+
+Application = Composition of Components
+
+Component 
+    represents one small part of the UI
+    Presentation + Data + User Interaction
+
+Virtual DOM
+
+HTML vs JSX
+==================================
+HTML
+    Open tags without close tags are allowed
+    'class' attribute is allowed
+    'for' attribute is allowed
+JSX
+    All open tags must have the corresponding close tag
+    Use 'className' instead of 'class'
+    Use 'htmlFor' instead of 'for'
