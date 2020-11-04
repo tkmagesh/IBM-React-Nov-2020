@@ -70,8 +70,9 @@
         const store = StateManager.createStore(spinnerReducer);
 
         function renderSpinner(){
+            const value = store.getState();
             ReactDOM.render(
-                <Spinner value={store.getState()} dispatch={store.dispatch} {...spinnerActionCreators} />
+                <Spinner value={value} dispatch={store.dispatch} {...spinnerActionCreators} />
             , document.getElementById('root'));
         }
         renderSpinner();
