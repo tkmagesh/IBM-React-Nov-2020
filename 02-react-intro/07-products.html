@@ -17,7 +17,10 @@
 
             onBtnAddProductClick = () => {
                 const newProductName = this.txtNewProductNameRef.current.value;
-                this.setState({ productNames : [ ...this.state.productNames, newProductName] });
+                this.setState({ productNames : [ ...this.state.productNames, newProductName] }, () => {
+                    this.props.onListChange(this.state.productNames);
+                });
+                
             }
 
             render(){
@@ -27,10 +30,6 @@
                     <div>
                         <h1>Products</h1>
                         <hr/>
-                        <div>
-                            <span>Count : </span>
-                            <span>{productNames.length}</span>
-                        </div>
                         <label>Product Name :</label>
                         <input type="text" ref={this.txtNewProductNameRef} />
                         <input type="button" value="Add Product" onClick={this.onBtnAddProductClick}/>
@@ -42,7 +41,35 @@
             }
         }
 
-        ReactDOM.render(<Products/>, document.getElementById('root'));
+        class ProductsCount extends React.Component{
+            render(){
+                return(
+                    <div>
+                        <span>Count : </span>
+                        <span>{this.props.count}</span>
+                    </div>
+                )
+            }
+        }
+
+        class MyApp extends React.Component{
+            state = { 
+                count : 0
+            }
+            onProductsListChange = (productNames) => {
+                this.setState({ count : productNames.length });
+            }
+            render(){
+                return(
+                    <div>
+                        <Products onListChange={this.onProductsListChange}/>
+                        <ProductsCount count={this.state.count}/>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<MyApp/>, document.getElementById('root'));
     </script>
 </head>
 <body>
