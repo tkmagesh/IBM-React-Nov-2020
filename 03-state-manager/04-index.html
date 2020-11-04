@@ -12,7 +12,8 @@
     <!-- 
         1. initial version
         2. introducing action creators
-
+        3. simplying passing the action creator methods to the component
+        4. removing dependency on the 'store' in the component
      -->
     <script type="text/babel">
         class Spinner extends React.Component {
@@ -23,19 +24,17 @@
             onDecrementClick = () => {
                 const { delta } = this.state;
                 const action = this.props.decrement(delta);
-                this.props.store.dispatch(action);
+                this.props.dispatch(action);
             };
             
             onIncrementClick = () => {
                 const { delta } = this.state;
                 const action = this.props.increment(delta);
-                this.props.store.dispatch(action);
+                this.props.dispatch(action);
             };
 
             render(){
-                console.log(this.props);
-                const { store } = this.props,
-                    value = store.getState();
+                const { value } = this.props;
                 return(
                     <div>
                         <h3>Spinner</h3>
@@ -72,11 +71,7 @@
 
         function renderSpinner(){
             ReactDOM.render(
-                /* <Spinner store={store} 
-                    increment={spinnerActionCreators.increment} 
-                    decrement={spinnerActionCreators.decrement} 
-                /> */
-                <Spinner store={store} {...spinnerActionCreators} />
+                <Spinner value={store.getState()} dispatch={store.dispatch} {...spinnerActionCreators} />
             , document.getElementById('root'));
         }
         renderSpinner();
