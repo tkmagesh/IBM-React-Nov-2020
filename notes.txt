@@ -172,4 +172,16 @@ Assignment - 4
 Assignment - 5
     4-Nov - 10:35AM
 
+
+UI State & App State
+
+UI State
+    - any data that supports the presentation logic of the component
+    - it is highly UNLIKELY that this data would be needed in other parts of the application
+    - Feel free to maintain this data in the component state
+
+App State
+    - any data that supports the core business logic of the application
+    - it is highly LIKELY that this data would be needed in other parts of the application
+    - DO NOT maintain this data in the component state, instead maintain the data outside the component hierarchy
     
