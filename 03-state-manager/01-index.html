@@ -9,14 +9,25 @@
     <script src="react.development.js"></script>
     <script src="react-dom.development.js"></script>
     <script src="babel.min.js"></script>
+    <!-- 
+        1. initial version
+
+
+     -->
     <script type="text/babel">
         class Spinner extends React.Component {
+            state = { 
+                value : 0
+            };
+
             onDecrementClick = () => {
-                this.props.store.dispatch({ type : 'DECREMENT' });
+                const { value } = this.state;
+                this.props.store.dispatch({ type : 'DECREMENT', payload : value });
             };
             
             onIncrementClick = () => {
-                this.props.store.dispatch({ type : 'INCREMENT' });
+                const { value } = this.state;
+                this.props.store.dispatch({ type : 'INCREMENT', payload : value });
             };
 
             render(){
@@ -26,6 +37,9 @@
                     <div>
                         <h3>Spinner</h3>
                         <hr/>
+                        <label>Delta : </label>
+                        <input type="number" onChange={ evt => this.setState({ value : parseInt(evt.target.value)})}/>
+                        <br/>
                         <input type="button" value="DECREMENT" onClick={this.onDecrementClick}/>
                         <span> [ {value} ] </span>
                         <input type="button" value="INCREMENT" onClick={this.onIncrementClick}/>
