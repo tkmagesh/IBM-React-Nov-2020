@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import categoryActionCreators from './actions';
 import './index.css';
 
 class Categories extends Component{
@@ -26,4 +29,14 @@ class Categories extends Component{
     }
 }
 
-export default Categories;
+function mapStateToProps(storeState){
+    const categories = storeState.categories;
+    return { data : categories };
+}
+
+function mapDispatchToProps(dispatch){
+    const categoryActionDispatchers = bindActionCreators(categoryActionCreators, dispatch);
+    return categoryActionDispatchers
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Categories);
