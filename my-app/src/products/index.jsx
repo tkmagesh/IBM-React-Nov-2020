@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
 import ProductStats from './views/ProductStats';
 import ProductEditor from './views/ProductEditor';
 import ProductsList from './views/ProductsList';
 import './index.css';
+import productActionCreators from './actions';
 
 class Products extends Component {
     render() {
@@ -24,4 +28,14 @@ class Products extends Component {
     }
 }
 
-export default Products;
+function mapStateToProps(storeState){
+    const products = storeState.products;
+    return { data : products };
+}
+
+function mapDispatchToProps(dispatch){
+    const productActionDispatchers = bindActionCreators(productActionCreators, dispatch);
+    return productActionDispatchers;
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Products);
