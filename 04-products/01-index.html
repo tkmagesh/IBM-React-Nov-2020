@@ -57,8 +57,8 @@
         Use Cases :
             (done) 1. Add products
             (done) 2. List the added products
-            3. Toggle the 'out of stock' status of any product
-            4. Remove any product
+            (done) 3. Toggle the 'out of stock' status of any product
+            (done) 4. Remove any product
             5. Remove 'out of stock' products
             6. Display the stats ( # of out of stock products / total # of products)
             7. Persist the products in the server
@@ -82,7 +82,7 @@
             };
 
             render(){
-                const { data } = this.props;
+                const { data, toggleOutOfStock, removeProduct } = this.props;
                 const productItems = data.map(product => {
                     const { id, name, description, price, isOutOfStock } = product;
                     return (
@@ -90,10 +90,13 @@
                             <span className={'name ' + (isOutOfStock ? 'outofstock' : '')}>{name}</span>
                             <div>{description}</div>
                             <div className="price">Rs.{price}</div>
-                            <input type="checkbox" checked={isOutOfStock} />
+                            <input type="checkbox" 
+                                checked={isOutOfStock} 
+                                onChange={ () => toggleOutOfStock(product)}
+                            />
                             <label htmlFor="">Out of Stock</label>
                             <br/>
-                            <input type="button" value="Remove" />
+                            <input type="button" value="Remove" onClick={ () => removeProduct(product) } />
                         </li>
                     )
                 })
@@ -140,6 +143,15 @@
                 const newState = [ ...currentState, action.payload ];
                 return newState;
             }
+            if (action.type === 'UPDATE_PRODUCT'){
+                const updatedProduct = action.payload;
+                const newState = currentState.map(p => p.id === updatedProduct.id ? updatedProduct : p);
+                return newState;
+            }
+            if (action.type === 'REMOVE_PRODUCT'){
+                const newState = currentState.filter(p => p.id !== action.payload.id);
+                return newState;
+            }
             return currentState;
         }
 
@@ -157,6 +169,15 @@
                     isOutOfStock : false
                 };
                 const action = { type : 'ADD_PRODUCT' , payload : newProduct};
+                return action;
+            },
+            toggleOutOfStock(product){
+                const updatedProduct = { ...product, isOutOfStock : !product.isOutOfStock };
+                const action = { type : 'UPDATE_PRODUCT' , payload : updatedProduct };
+                return action;
+            },
+            removeProduct(product){
+                const action = { type : 'REMOVE_PRODUCT' , payload : product};
                 return action;
             }
         }
