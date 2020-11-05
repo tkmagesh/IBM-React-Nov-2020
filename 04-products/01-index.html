@@ -139,8 +139,8 @@
 
         function productsReducer(currentState = [ ], action){
             if (action.type === 'ADD_PRODUCT'){
-                currentState.push(action.payload);
-                return currentState;
+                const newState = [ ...currentState, action.payload ];
+                return newState;
             }
             return currentState;
         }
@@ -148,7 +148,7 @@
         const store = StateManager.createStore(productsReducer);
 
         let newProductId = 0;
-        
+
         const productActionCreators = {
             addNew(name, description, price){
                 const newProduct = {
