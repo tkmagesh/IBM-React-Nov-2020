@@ -128,6 +128,7 @@
                 addNew(name, description, price);
             };
             render(){
+                console.log(this.props);
                 return(
                     <section className="edit">
                         <div className="field">
@@ -149,22 +150,28 @@
                 )
             }
         }
-        class Products extends React.Component{
-            
 
+        class ProductStats extends React.Component {
             render(){
-                const { data, toggleOutOfStock, removeProduct, removeOutOfStock } = this.props;
-                const outOfStockCount = data.reduce((result, product) => product.isOutOfStock ? result + 1 : result, 0);
+                const { products } = this.props;
+                const outOfStockCount = products.reduce((result, product) => product.isOutOfStock ? result + 1 : result, 0);
+                return(
+                     <section className="stats">
+                            <span className="outofstock">{outOfStockCount}</span>
+                            <span> / </span>
+                            <span>{products.length}</span>
+                        </section>
+                )
+            }
+        }
+        class Products extends React.Component{
+            render(){
+                const { data, toggleOutOfStock, removeProduct, removeOutOfStock, addNew } = this.props;
                 return(
                     <div>
                         <h3>Products</h3>
                         <hr/>
-                        <section className="stats">
-                            <span className="outofstock">{outOfStockCount}</span>
-                            <span> / </span>
-                            <span>{data.length}</span>
-                        </section>
-                        
+                        <ProductStats products={data} />                        
                         <ProductEditor addNew={addNew} />
                         <ProductsList
                             products={data}
