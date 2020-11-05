@@ -70,7 +70,7 @@
      <script type="text/babel">
         class ProductItem extends React.Component{
             render(){
-                const { product, toggleOutOfStock, removeProduct } = this.props, 
+                const { product, toggleOutOfStock, remove } = this.props, 
                     { id, name, description, price, isOutOfStock } = product;
                 return(
                     <li>
@@ -83,7 +83,7 @@
                         />
                         <label htmlFor="">Out of Stock</label>
                         <br/>
-                        <input type="button" value="Remove" onClick={ () => removeProduct(product) } />
+                        <input type="button" value="Remove" onClick={ () => remove(product) } />
                     </li>
                 )
             }
@@ -91,13 +91,13 @@
 
         class ProductsList extends React.Component {
             render(){
-                const { products, toggleOutOfStock, removeProduct, removeOutOfStock } = this.props;
+                const { products, toggleOutOfStock, remove, removeOutOfStock } = this.props;
                 const productItems = products.map(product =>  (
                         <ProductItem 
                             key={product.id} 
                             product={product} 
                             toggleOutOfStock={toggleOutOfStock} 
-                            removeProduct={removeProduct} 
+                            remove={remove} 
                         />
                     )
                 );
@@ -128,7 +128,6 @@
                 addNew(name, description, price);
             };
             render(){
-                console.log(this.props);
                 return(
                     <section className="edit">
                         <div className="field">
@@ -166,7 +165,7 @@
         }
         class Products extends React.Component{
             render(){
-                const { data, toggleOutOfStock, removeProduct, removeOutOfStock, addNew } = this.props;
+                const { data, toggleOutOfStock, remove, removeOutOfStock, addNew } = this.props;
                 return(
                     <div>
                         <h3>Products</h3>
@@ -176,7 +175,7 @@
                         <ProductsList
                             products={data}
                             toggleOutOfStock={toggleOutOfStock}
-                            removeProduct={removeProduct}
+                            remove={remove}
                             removeOutOfStock={removeOutOfStock}
                         />
                     </div>
@@ -227,7 +226,7 @@
                 const action = { type : 'UPDATE_PRODUCT' , payload : updatedProduct };
                 return action;
             },
-            removeProduct(product){
+            remove(product){
                 const action = { type : 'REMOVE_PRODUCT' , payload : product};
                 return action;
             },
