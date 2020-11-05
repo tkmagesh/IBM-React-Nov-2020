@@ -42,6 +42,7 @@
             font-size: 15pt;
             font-style: italic;
             font-weight: bold;
+            text-align: right;
         }
         .outofstock {
             color : red;
@@ -54,8 +55,8 @@
     </style>
     <!-- 
         Use Cases :
-            1. Add products
-            2. List the added products
+            (done) 1. Add products
+            (done) 2. List the added products
             3. Toggle the 'out of stock' status of any product
             4. Remove any product
             5. Remove 'out of stock' products
@@ -82,6 +83,20 @@
 
             render(){
                 const { data } = this.props;
+                const productItems = data.map(product => {
+                    const { id, name, description, price, isOutOfStock } = product;
+                    return (
+                        <li key={id}>
+                            <span className={'name ' + (isOutOfStock ? 'outofstock' : '')}>{name}</span>
+                            <div>{description}</div>
+                            <div className="price">Rs.{price}</div>
+                            <input type="checkbox" checked={isOutOfStock} />
+                            <label htmlFor="">Out of Stock</label>
+                            <br/>
+                            <input type="button" value="Remove" />
+                        </li>
+                    )
+                })
                 return(
                     <div>
                         <h3>Products</h3>
@@ -111,24 +126,7 @@
                         
                         <section className="list">
                             <ol>
-                                <li>
-                                    <span className="name">Product Name - 1</span>
-                                    <div>Aute sunt ea occaecat est voluptate sint ex non reprehenderit in velit. Commodo anim incididunt irure id et quis laborum veniam pariatur esse culpa ex sunt. Veniam nostrud dolor voluptate nulla tempor eiusmod excepteur sunt non pariatur consequat nulla. Amet dolor do minim eiusmod aliquip est fugiat voluptate ipsum incididunt ex magna in elit. Commodo occaecat est veniam elit laboris ipsum in amet aliqua ex proident irure. Esse quis irure id qui cupidatat irure aliqua quis sit ex fugiat velit eu. Cupidatat magna pariatur enim enim dolore commodo ut aliquip occaecat.</div>
-                                    <div className="price">Price</div>
-                                    <input type="checkbox" />
-                                    <label htmlFor="">Out of Stock</label>
-                                    <br/>
-                                    <input type="button" value="Remove" />
-                                </li>
-                                <li>
-                                    <span className="name outofstock">Product Name - 2</span>
-                                    <div>Elit nulla pariatur eiusmod sunt ut ad laboris. Aliqua incididunt anim do sint tempor mollit. Nulla aliquip sunt veniam adipisicing exercitation reprehenderit magna. Mollit magna do velit eiusmod culpa ex ea labore. Lorem minim velit esse ipsum culpa. Voluptate amet id incididunt ad excepteur consequat nulla ullamco.</div>
-                                    <div className="price">Price</div>
-                                    <input type="checkbox" />
-                                    <label htmlFor="">Out of Stock</label>
-                                    <br/>
-                                    <input type="button" value="Remove" />
-                                </li>
+                               {productItems}
                             </ol>
                             <input type="button" value="Remove Out Of Stock" />
                         </section>
@@ -155,7 +153,8 @@
                     id : ++newProductId,
                     name : name,
                     description : description,
-                    price : price
+                    price : price,
+                    isOutOfStock : false
                 };
                 const action = { type : 'ADD_PRODUCT' , payload : newProduct};
                 return action;
