@@ -60,7 +60,7 @@
             (done) 3. Toggle the 'out of stock' status of any product
             (done) 4. Remove any product
             (done) 5. Remove 'out of stock' products
-            6. Display the stats ( # of out of stock products / total # of products)
+            (done) 6. Display the stats ( # of out of stock products / total # of products)
             7. Persist the products in the server
      -->
      <script src="state-manager.js"></script>
@@ -99,13 +99,14 @@
                             <input type="button" value="Remove" onClick={ () => removeProduct(product) } />
                         </li>
                     )
-                })
+                }),
+                outOfStockCount = data.reduce((result, product) => product.isOutOfStock ? result + 1 : result, 0);
                 return(
                     <div>
                         <h3>Products</h3>
                         <hr/>
                         <section className="stats">
-                            <span className="outofstock">1</span>
+                            <span className="outofstock">{outOfStockCount}</span>
                             <span> / </span>
                             <span>{data.length}</span>
                         </section>
