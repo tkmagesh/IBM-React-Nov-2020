@@ -6,7 +6,10 @@ class ProductItem extends Component {
             { id, name, description, price, isOutOfStock } = product;
         return (
             <li>
-                <span className={'name ' + (isOutOfStock ? 'outofstock' : '')}>{name}</span>
+                <span className={'name ' + (isOutOfStock ? 'outofstock' : '')}>
+                    {name}
+                </span>
+                <span> [Category] </span>
                 <div>{description}</div>
                 <div className="price">Rs.{price}</div>
                 <input type="checkbox"
