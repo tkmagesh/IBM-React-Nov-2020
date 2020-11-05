@@ -3,24 +3,26 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { bindActionCreators } from 'redux';
-/* import Products from './products';
-import productActionCreators from './products/actions'; */
+import Products from './products';
+import productActionCreators from './products/actions';
 
 import Categories from './categories';
 import categoryActionCreators from './categories/actions';
 
 import store from './store';
 
-//const productActionDispatchers = bindActionCreators(productActionCreators, store.dispatch);
+
+const productActionDispatchers = bindActionCreators(productActionCreators, store.dispatch);
 const categoryActionDispatchers = bindActionCreators(categoryActionCreators, store.dispatch);
 
 function renderApp(){
-  //const products = store.getState();
-  const categories = store.getState();
+  const storeState = store.getState();
+  const products = storeState.products;
+  const categories = storeState.categories;
   ReactDOM.render(
     <React.StrictMode>
       <Categories data={categories} {...categoryActionDispatchers} />
-      {/* <Products data={products} {...productActionDispatchers} /> */}
+      <Products data={products} {...productActionDispatchers} />
     </React.StrictMode>,
     document.getElementById('root')
   );
