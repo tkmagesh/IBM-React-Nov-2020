@@ -68,7 +68,54 @@
      <script src="react-dom.development.js"></script>
      <script src="babel.min.js"></script>
      <script type="text/babel">
-        class Products extends React.Component{
+        class ProductItem extends React.Component{
+            render(){
+                const { product, toggleOutOfStock, removeProduct } = this.props, 
+                    { id, name, description, price, isOutOfStock } = product;
+                return(
+                    <li>
+                        <span className={'name ' + (isOutOfStock ? 'outofstock' : '')}>{name}</span>
+                        <div>{description}</div>
+                        <div className="price">Rs.{price}</div>
+                        <input type="checkbox" 
+                            checked={isOutOfStock} 
+                            onChange={ () => toggleOutOfStock(product)}
+                        />
+                        <label htmlFor="">Out of Stock</label>
+                        <br/>
+                        <input type="button" value="Remove" onClick={ () => removeProduct(product) } />
+                    </li>
+                )
+            }
+        }
+
+        class ProductsList extends React.Component {
+            render(){
+                const { products, toggleOutOfStock, removeProduct, removeOutOfStock } = this.props;
+                const productItems = products.map(product =>  (
+                        <ProductItem 
+                            key={product.id} 
+                            product={product} 
+                            toggleOutOfStock={toggleOutOfStock} 
+                            removeProduct={removeProduct} 
+                        />
+                    )
+                );
+                return(
+                    <section className="list">
+                        <ol>
+                            {productItems}
+                        </ol>
+                        <input 
+                            type="button" 
+                            value="Remove Out Of Stock" 
+                            onClick={() => removeOutOfStock(products)} 
+                        />
+                    </section>
+                )
+            }
+        }
+        class ProductEditor extends React.Component {
             state = { 
                 name : '',
                 description : '',
@@ -80,27 +127,34 @@
                     { name, description, price } = this.state;
                 addNew(name, description, price);
             };
+            render(){
+                return(
+                    <section className="edit">
+                        <div className="field">
+                            <label htmlFor="">Name :</label>
+                            <input type="text" onChange={ evt => this.setState({ name: evt.target.value})} />
+                        </div>
+                        <div className="field">
+                            <label htmlFor="">Description :</label>
+                            <input type="text" onChange={ evt => this.setState({ description: evt.target.value})} />
+                        </div>
+                        <div className="field">
+                            <label htmlFor="">Price :</label>
+                            <input type="number" onChange={ evt => this.setState({ price: parseInt(evt.target.value) })}/>
+                        </div>
+                        <div className="field">
+                            <input type="button" value="Add Product" onClick={ this.onAddNewProductClick } />
+                        </div>
+                    </section>
+                )
+            }
+        }
+        class Products extends React.Component{
+            
 
             render(){
                 const { data, toggleOutOfStock, removeProduct, removeOutOfStock } = this.props;
-                const productItems = data.map(product => {
-                    const { id, name, description, price, isOutOfStock } = product;
-                    return (
-                        <li key={id}>
-                            <span className={'name ' + (isOutOfStock ? 'outofstock' : '')}>{name}</span>
-                            <div>{description}</div>
-                            <div className="price">Rs.{price}</div>
-                            <input type="checkbox" 
-                                checked={isOutOfStock} 
-                                onChange={ () => toggleOutOfStock(product)}
-                            />
-                            <label htmlFor="">Out of Stock</label>
-                            <br/>
-                            <input type="button" value="Remove" onClick={ () => removeProduct(product) } />
-                        </li>
-                    )
-                }),
-                outOfStockCount = data.reduce((result, product) => product.isOutOfStock ? result + 1 : result, 0);
+                const outOfStockCount = data.reduce((result, product) => product.isOutOfStock ? result + 1 : result, 0);
                 return(
                     <div>
                         <h3>Products</h3>
@@ -110,31 +164,14 @@
                             <span> / </span>
                             <span>{data.length}</span>
                         </section>
-                        <section className="edit">
-                            <div className="field">
-                                <label htmlFor="">Name :</label>
-                                <input type="text" onChange={ evt => this.setState({ name: evt.target.value})} />
-                            </div>
-                            <div className="field">
-                                <label htmlFor="">Description :</label>
-                                <input type="text" onChange={ evt => this.setState({ description: evt.target.value})} />
-                            </div>
-                            <div className="field">
-                                <label htmlFor="">Price :</label>
-                                <input type="number" onChange={ evt => this.setState({ price: parseInt(evt.target.value) })}/>
-                            </div>
-                            <div className="field">
-                                <input type="button" value="Add Product" onClick={ this.onAddNewProductClick } />
-                            </div>
-                        </section>
                         
-                        <section className="list">
-                            <ol>
-                               {productItems}
-                            </ol>
-                            <input type="button" value="Remove Out Of Stock" 
-                                onClick={() => removeOutOfStock(data)} />
-                        </section>
+                        <ProductEditor addNew={addNew} />
+                        <ProductsList
+                            products={data}
+                            toggleOutOfStock={toggleOutOfStock}
+                            removeProduct={removeProduct}
+                            removeOutOfStock={removeOutOfStock}
+                        />
                     </div>
                 )
             }
