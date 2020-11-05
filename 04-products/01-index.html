@@ -68,6 +68,18 @@
      <script src="babel.min.js"></script>
      <script type="text/babel">
         class Products extends React.Component{
+            state = { 
+                name : '',
+                description : '',
+                price : 0
+            };
+
+            onAddNewProductClick = () => {
+                const { addNew } = this.props,
+                    { name, description, price } = this.state;
+                addNew(name, description, price);
+            };
+
             render(){
                 const { data } = this.props;
                 return(
@@ -82,18 +94,18 @@
                         <section className="edit">
                             <div className="field">
                                 <label htmlFor="">Name :</label>
-                                <input type="text" />
+                                <input type="text" onChange={ evt => this.setState({ name: evt.target.value})} />
                             </div>
                             <div className="field">
                                 <label htmlFor="">Description :</label>
-                                <input type="text" />
+                                <input type="text" onChange={ evt => this.setState({ description: evt.target.value})} />
                             </div>
                             <div className="field">
                                 <label htmlFor="">Price :</label>
-                                <input type="number" />
+                                <input type="number" onChange={ evt => this.setState({ price: parseInt(evt.target.value) })}/>
                             </div>
                             <div className="field">
-                                <input type="button" value="Add Product" />
+                                <input type="button" value="Add Product" onClick={ this.onAddNewProductClick } />
                             </div>
                         </section>
                         
@@ -126,15 +138,36 @@
         }
 
         function productsReducer(currentState = [ ], action){
+            if (action.type === 'ADD_PRODUCT'){
+                currentState.push(action.payload);
+                return currentState;
+            }
             return currentState;
         }
 
         const store = StateManager.createStore(productsReducer);
 
+        let newProductId = 0;
+        
+        const productActionCreators = {
+            addNew(name, description, price){
+                const newProduct = {
+                    id : ++newProductId,
+                    name : name,
+                    description : description,
+                    price : price
+                };
+                const action = { type : 'ADD_PRODUCT' , payload : newProduct};
+                return action;
+            }
+        }
+
+        const productActionDispatchers = StateManager.bindActionCreators(productActionCreators, store.dispatch);
 
         function renderApp(){
             const products = store.getState();
-            ReactDOM.render(<Products data={products}/>
+            ReactDOM.render(
+                    <Products data={products} {...productActionDispatchers} />
                 , document.getElementById('root')
             )
         }
