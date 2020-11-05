@@ -1,3 +1,4 @@
+let newProductId = 0;
 function addNew(name, description, price){
     const newProduct = {
         id: ++newProductId,

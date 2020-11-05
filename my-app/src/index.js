@@ -1,35 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { bindActionCreators } from 'redux';
+import Products from './products';
+import productActionCreators from './products/actions';
 
-/* 
-import * as calculator from './math';
-console.log(calculator); 
-*/
+import store from './store';
 
-/* 
-//import * as calculator from './math';
-//calculator.add(10,20)
-//const add = calculator.add;
-//const { add } = calculator;
-import { add } from './math'
-add(10,20) 
-*/
+const productActionDispatchers = bindActionCreators(productActionCreators, store.dispatch);
 
-//importing default exported object
-/* 
-import calculator from './math';
-calculator.add(10,20); 
-*/
+function renderApp(){
+  const products = store.getState();
+  ReactDOM.render(
+    <React.StrictMode>
+      <Products data={products} {...productActionDispatchers} />
+    </React.StrictMode>,
+    document.getElementById('root')
+  );
+}
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+renderApp();
+
+store.subscribe(renderApp);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

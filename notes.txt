@@ -190,6 +190,28 @@ ES6 Modules
     - any 'public' entity has to explicitly 'export'ed.
     - any public entity has to explicity 'import'ed to use in other js files
 
+    ES6 Module examples
+
+        /* 
+        import * as calculator from './math';
+        console.log(calculator); 
+        */
+
+        /* 
+        //import * as calculator from './math';
+        //calculator.add(10,20)
+        //const add = calculator.add;
+        //const { add } = calculator;
+        import { add } from './math'
+        add(10,20) 
+        */
+
+        //importing default exported object
+        /* 
+        import calculator from './math';
+        calculator.add(10,20); 
+        */
+
 ./Products
     ./actions
     ./views
