@@ -62,55 +62,89 @@
             6. Display the stats ( # of out of stock products / total # of products)
             7. Persist the products in the server
      -->
+     <script src="state-manager.js"></script>
+     <script src="react.development.js"></script>
+     <script src="react-dom.development.js"></script>
+     <script src="babel.min.js"></script>
+     <script type="text/babel">
+        class Products extends React.Component{
+            render(){
+                const { data } = this.props;
+                return(
+                    <div>
+                        <h3>Products</h3>
+                        <hr/>
+                        <section className="stats">
+                            <span className="outofstock">1</span>
+                            <span> / </span>
+                            <span>{data.length}</span>
+                        </section>
+                        <section className="edit">
+                            <div className="field">
+                                <label htmlFor="">Name :</label>
+                                <input type="text" />
+                            </div>
+                            <div className="field">
+                                <label htmlFor="">Description :</label>
+                                <input type="text" />
+                            </div>
+                            <div className="field">
+                                <label htmlFor="">Price :</label>
+                                <input type="number" />
+                            </div>
+                            <div className="field">
+                                <input type="button" value="Add Product" />
+                            </div>
+                        </section>
+                        
+                        <section className="list">
+                            <ol>
+                                <li>
+                                    <span className="name">Product Name - 1</span>
+                                    <div>Aute sunt ea occaecat est voluptate sint ex non reprehenderit in velit. Commodo anim incididunt irure id et quis laborum veniam pariatur esse culpa ex sunt. Veniam nostrud dolor voluptate nulla tempor eiusmod excepteur sunt non pariatur consequat nulla. Amet dolor do minim eiusmod aliquip est fugiat voluptate ipsum incididunt ex magna in elit. Commodo occaecat est veniam elit laboris ipsum in amet aliqua ex proident irure. Esse quis irure id qui cupidatat irure aliqua quis sit ex fugiat velit eu. Cupidatat magna pariatur enim enim dolore commodo ut aliquip occaecat.</div>
+                                    <div className="price">Price</div>
+                                    <input type="checkbox" />
+                                    <label htmlFor="">Out of Stock</label>
+                                    <br/>
+                                    <input type="button" value="Remove" />
+                                </li>
+                                <li>
+                                    <span className="name outofstock">Product Name - 2</span>
+                                    <div>Elit nulla pariatur eiusmod sunt ut ad laboris. Aliqua incididunt anim do sint tempor mollit. Nulla aliquip sunt veniam adipisicing exercitation reprehenderit magna. Mollit magna do velit eiusmod culpa ex ea labore. Lorem minim velit esse ipsum culpa. Voluptate amet id incididunt ad excepteur consequat nulla ullamco.</div>
+                                    <div className="price">Price</div>
+                                    <input type="checkbox" />
+                                    <label htmlFor="">Out of Stock</label>
+                                    <br/>
+                                    <input type="button" value="Remove" />
+                                </li>
+                            </ol>
+                            <input type="button" value="Remove Out Of Stock" />
+                        </section>
+                    </div>
+                )
+            }
+        }
+
+        function productsReducer(currentState = [ ], action){
+            return currentState;
+        }
+
+        const store = StateManager.createStore(productsReducer);
+
+
+        function renderApp(){
+            const products = store.getState();
+            ReactDOM.render(<Products data={products}/>
+                , document.getElementById('root')
+            )
+        }
+        
+        renderApp();
+        
+        store.subscribe(renderApp);
+    </script>
 </head>
 <body>
-    <h3>Products</h3>
-    <hr>
-    <section class="stats">
-        <span class="outofstock">1</span>
-        <span> / </span>
-        <span>2</span>
-    </section>
-    <section class="edit">
-        <div class="field">
-            <label for="">Name :</label>
-            <input type="text" name="" id="">
-        </div>
-        <div class="field">
-            <label for="">Description :</label>
-            <input type="text" name="" id="">
-        </div>
-        <div class="field">
-            <label for="">Price :</label>
-            <input type="number" name="" id="">
-        </div>
-        <div class="field">
-            <input type="button" value="Add Product">
-        </div>
-    </section>
-    
-    <section class="list">
-        <ol>
-            <li>
-                <span class="name">Product Name - 1</span>
-                <div>Aute sunt ea occaecat est voluptate sint ex non reprehenderit in velit. Commodo anim incididunt irure id et quis laborum veniam pariatur esse culpa ex sunt. Veniam nostrud dolor voluptate nulla tempor eiusmod excepteur sunt non pariatur consequat nulla. Amet dolor do minim eiusmod aliquip est fugiat voluptate ipsum incididunt ex magna in elit. Commodo occaecat est veniam elit laboris ipsum in amet aliqua ex proident irure. Esse quis irure id qui cupidatat irure aliqua quis sit ex fugiat velit eu. Cupidatat magna pariatur enim enim dolore commodo ut aliquip occaecat.</div>
-                <div class="price">Price</div>
-                <input type="checkbox" name="" id="">
-                <label for="">Out of Stock</label>
-                <br>
-                <input type="button" value="Remove">
-            </li>
-            <li>
-                <span class="name outofstock">Product Name - 2</span>
-                <div>Elit nulla pariatur eiusmod sunt ut ad laboris. Aliqua incididunt anim do sint tempor mollit. Nulla aliquip sunt veniam adipisicing exercitation reprehenderit magna. Mollit magna do velit eiusmod culpa ex ea labore. Lorem minim velit esse ipsum culpa. Voluptate amet id incididunt ad excepteur consequat nulla ullamco.</div>
-                <div class="price">Price</div>
-                <input type="checkbox" name="" id="">
-                <label for="">Out of Stock</label>
-                <br>
-                <input type="button" value="Remove">
-            </li>
-        </ol>
-        <input type="button" value="Remove Out Of Stock" />
-    </section>
+    <div id="root"></div>
 </body>
 </html>
