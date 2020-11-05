@@ -59,7 +59,7 @@
             (done) 2. List the added products
             (done) 3. Toggle the 'out of stock' status of any product
             (done) 4. Remove any product
-            5. Remove 'out of stock' products
+            (done) 5. Remove 'out of stock' products
             6. Display the stats ( # of out of stock products / total # of products)
             7. Persist the products in the server
      -->
@@ -82,7 +82,7 @@
             };
 
             render(){
-                const { data, toggleOutOfStock, removeProduct } = this.props;
+                const { data, toggleOutOfStock, removeProduct, removeOutOfStock } = this.props;
                 const productItems = data.map(product => {
                     const { id, name, description, price, isOutOfStock } = product;
                     return (
@@ -131,7 +131,8 @@
                             <ol>
                                {productItems}
                             </ol>
-                            <input type="button" value="Remove Out Of Stock" />
+                            <input type="button" value="Remove Out Of Stock" 
+                                onClick={() => removeOutOfStock(data)} />
                         </section>
                     </div>
                 )
@@ -150,6 +151,11 @@
             }
             if (action.type === 'REMOVE_PRODUCT'){
                 const newState = currentState.filter(p => p.id !== action.payload.id);
+                return newState;
+            }
+            if (action.type === 'REMOVE_MANY_PRODUCTS'){
+                const productsToRemove = action.payload;
+                const newState = currentState.filter(p => !productsToRemove.find(prod => prod.id === p.id));
                 return newState;
             }
             return currentState;
@@ -178,6 +184,11 @@
             },
             removeProduct(product){
                 const action = { type : 'REMOVE_PRODUCT' , payload : product};
+                return action;
+            },
+            removeOutOfStock(products /* to be fixed */){
+                const productsToRemove = products.filter(p => p.isOutOfStock);
+                const action = { type : 'REMOVE_MANY_PRODUCTS', payload : productsToRemove };
                 return action;
             }
         }
