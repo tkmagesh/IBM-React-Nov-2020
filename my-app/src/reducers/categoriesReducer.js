@@ -1,6 +1,13 @@
-function categoriesReducer(currentState = [], action){
+const initialState = { 
+    categoryList : [],
+    selectedCategory : ''
+};
+
+function categoriesReducer(currentState = initialState, action){
     if (action.type === 'ADD_CATEGORY')
-        return [...currentState, action.payload];
+        return {...currentState, categoryList : [...currentState.categoryList, action.payload] };
+    if (action.type === 'SET_SELECTED_CATEGORY')
+        return {...currentState, selectedCategory : action.payload }
     return currentState;
 }
 

@@ -13,7 +13,7 @@ class Categories extends Component{
         this.props.addNew(this.state.newCategorName);
     }
     render(){
-        const { data } = this.props;
+        const { data, setSelected } = this.props;
         return(
             <div>
                 <h3>Categores</h3>
@@ -22,7 +22,16 @@ class Categories extends Component{
                 <input type="text" onChange={ evt => this.setState({ newCategorName : evt.target.value})} />                
                 <input type="button" value="Add New" onClick={this.onAddNewClick} />
                 <ol>
-                    { data.map(category => (<li key={category.id}>{category.name} </li>)) }
+                    { 
+                        data.map(category => (
+                            <li 
+                                key={category.id} 
+                                onClick={ evt => setSelected(category.name)}
+                            >
+                                {category.name} 
+                            </li>)
+                        ) 
+                    }
                 </ol>
             </div>
         )
@@ -30,7 +39,7 @@ class Categories extends Component{
 }
 
 function mapStateToProps(storeState){
-    const categories = storeState.categories;
+    const categories = storeState.categories.categoryList;
     return { data : categories };
 }
 

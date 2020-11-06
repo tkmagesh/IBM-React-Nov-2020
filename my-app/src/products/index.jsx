@@ -30,8 +30,9 @@ class Products extends Component {
 
 function mapStateToProps(storeState){
     const products = storeState.products,
-        categories = storeState.categories;
-    return { data : products, categories };
+        categories = storeState.categories.categoryList,
+        selectedCatgory = storeState.categories.selectedCategory;
+    return { data : products.filter(p => p.category === selectedCatgory), categories };
 }
 
 function mapDispatchToProps(dispatch){
