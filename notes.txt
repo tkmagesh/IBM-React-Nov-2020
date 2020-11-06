@@ -260,3 +260,13 @@ Promise
         
 axios
     - promise based server communication library
+
+React Hooks
+    - functions to handle side effects in functional component
+    - hook function names must start with 'use'
+    - builtin hooks
+        useState
+        useReducer
+        useEffect
+        useMemo
+        useCallback
