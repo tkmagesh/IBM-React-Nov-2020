@@ -282,3 +282,23 @@ Component Lifecycle Events
 
     Removed
         componentWillUnmount
+
+Routing
+    Displaying components based on the URL
+    Route - URL to component mapping
+
+Build Steps
+    1. ES6 compilation
+    2. minify JS
+    3. uglify JS
+    4. bundle JS
+    5. version JS
+    6. minify CSS
+    7. bundle CSS
+    8. version CSS
+    9. update the references of generated JS file(s) in the index.html
+    10. update the references of generated CSS file(s) in the index.html
+    11. minify the index.html
+    12. copy the generated files to the build folder
+
+Webpack bundler
