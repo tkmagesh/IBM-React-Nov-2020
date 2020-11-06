@@ -21,6 +21,14 @@
       "price": 5,
       "category": "Stationary",
       "description": "Ipsum anim dolore irure amet ut ullamco sint deserunt est eiusmod. Cupidatat excepteur sint exercitation laboris ut. Velit et voluptate irure dolore velit irure consequat Lorem aliqua non velit exercitation laborum."
+    },
+    {
+      "id": 3,
+      "name": "Pen",
+      "description": "Ipsum anim dolore irure amet ut ullamco sint deserunt est eiusmod. Cupidatat excepteur sint exercitation laboris ut. Velit et voluptate irure dolore velit irure consequat Lorem aliqua non velit exercitation laborum.",
+      "price": 10,
+      "isOutOfStock": true,
+      "category": "Stationary"
     }
   ]
 }
