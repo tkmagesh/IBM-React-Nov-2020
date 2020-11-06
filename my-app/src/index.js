@@ -7,6 +7,7 @@ import axios from 'axios';
 
 import Products from "./products";
 import Categories from "./categories";
+import TimerContainer from './timer/TimerContainer';
 
 import store from "./store";
 
@@ -16,6 +17,7 @@ window['axios'] = axios;
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
+      <TimerContainer/>
       <Categories />
       <Products />
     </Provider>

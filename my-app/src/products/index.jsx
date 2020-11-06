@@ -8,13 +8,15 @@ import ProductsList from './views/ProductsList';
 import './index.css';
 import productActionCreators from './actions';
 
-/* class Products extends Component {
+class Products extends React.Component {
+    componentDidMount() {
+        this.props.load();
+    }
     render() {
         const { data, categories, toggleOutOfStock, remove, removeOutOfStock, addNew, load } = this.props;
         return (
             <div>
                 <h3>Products</h3>
-                <input type="button" value="LOAD PRODUCTS" onClick={load}/>
                 <hr />
                 <ProductStats products={data} />
                 <ProductEditor addNew={addNew} categories={categories} />
@@ -27,9 +29,9 @@ import productActionCreators from './actions';
             </div>
         )
     }
-} */
+}
 
-const Products = ({ data, categories, toggleOutOfStock, remove, removeOutOfStock, addNew, load }) => (
+/* const Products = ({ data, categories, toggleOutOfStock, remove, removeOutOfStock, addNew, load }) => (
     <div>
         <h3>Products</h3>
         <input type="button" value="LOAD PRODUCTS" onClick={load}/>
@@ -43,7 +45,8 @@ const Products = ({ data, categories, toggleOutOfStock, remove, removeOutOfStock
             removeOutOfStock={removeOutOfStock}
         />
     </div>
-);
+); */
+
     
 
 /* function mapStateToProps(storeState){

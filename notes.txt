@@ -270,3 +270,15 @@ React Hooks
         useEffect
         useMemo
         useCallback
+
+Component Lifecycle Events
+    Created
+        componentWillMount
+        componentDidMount
+
+    Updated
+        shouldComponentUpdate
+        componentDidUpdate
+
+    Removed
+        componentWillUnmount
