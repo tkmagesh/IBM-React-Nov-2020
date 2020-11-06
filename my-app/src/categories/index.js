@@ -12,8 +12,9 @@ class Categories extends Component{
     onAddNewClick = () => {
         this.props.addNew(this.state.newCategorName);
     }
+
     render(){
-        const { data, setSelected } = this.props;
+        const { data, selected, setSelected } = this.props;
         return(
             <div>
                 <h3>Categores</h3>
@@ -26,7 +27,8 @@ class Categories extends Component{
                         data.map(category => (
                             <li 
                                 key={category.id} 
-                                onClick={ evt => setSelected(category.name)}
+                                onClick={ () => setSelected(category.name) }
+                                className = {category.name === selected ? 'selected' : '' }
                             >
                                 {category.name} 
                             </li>)
@@ -39,8 +41,9 @@ class Categories extends Component{
 }
 
 function mapStateToProps(storeState){
-    const categories = storeState.categories.categoryList;
-    return { data : categories };
+    const categories = storeState.categories.categoryList,
+        selected = storeState.categories.selectedCategory
+    return { data : categories, selected : selected };
 }
 
 function mapDispatchToProps(dispatch){
