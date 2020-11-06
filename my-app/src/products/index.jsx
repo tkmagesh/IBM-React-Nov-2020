@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -8,7 +9,7 @@ import ProductsList from './views/ProductsList';
 import './index.css';
 import productActionCreators from './actions';
 
-class Products extends React.Component {
+/* class Products extends React.Component {
     componentDidMount() {
         this.props.load();
     }
@@ -29,23 +30,26 @@ class Products extends React.Component {
             </div>
         )
     }
-}
+} */
 
-/* const Products = ({ data, categories, toggleOutOfStock, remove, removeOutOfStock, addNew, load }) => (
-    <div>
-        <h3>Products</h3>
-        <input type="button" value="LOAD PRODUCTS" onClick={load}/>
-        <hr />
-        <ProductStats products={data} />
-        <ProductEditor addNew={addNew} categories={categories} />
-        <ProductsList
-            products={data}
-            toggleOutOfStock={toggleOutOfStock}
-            remove={remove}
-            removeOutOfStock={removeOutOfStock}
-        />
-    </div>
-); */
+ const Products = ({ data, categories, toggleOutOfStock, remove, removeOutOfStock, addNew, load }) => {
+     useEffect(load, [load]);
+     return (
+        <div>
+            <h3>Products</h3>
+            <input type="button" value="LOAD PRODUCTS" onClick={load}/>
+            <hr />
+            <ProductStats products={data} />
+            <ProductEditor addNew={addNew} categories={categories} />
+            <ProductsList
+                products={data}
+                toggleOutOfStock={toggleOutOfStock}
+                remove={remove}
+                removeOutOfStock={removeOutOfStock}
+            />
+        </div>
+    );
+}
 
     
 
