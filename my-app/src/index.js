@@ -4,10 +4,11 @@ import { Provider } from "react-redux";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import axios from 'axios';
-
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'; 
 import Products from "./products";
 import Categories from "./categories";
 import TimerContainer from './timer/TimerContainer';
+import Home from './Home';
 
 import store from "./store";
 
@@ -16,11 +17,29 @@ window['axios'] = axios;
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <TimerContainer/>
-      <Categories />
-      <Products />
-    </Provider>
+    <Router>
+      <Provider store={store}>
+        <h1>My App</h1>
+        <div>
+          <span>
+            [ <Link to="/">Home</Link> ]
+          </span>
+          <span>
+            [ <Link to="/products">Products</Link> ]
+          </span>
+          <span>
+            [ <Link to="/categories">Categories</Link> ]
+          </span>
+        </div>
+        <hr />
+        <TimerContainer />
+        <Switch>
+          <Route path="/categories" component={Categories}/>
+          <Route path="/products" component={Products}/>
+          <Route exact path="/" component={Home} />
+        </Switch>
+      </Provider>
+    </Router>
   </React.StrictMode>,
   document.getElementById("root")
 );

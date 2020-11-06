@@ -1,4 +1,3 @@
-import productsApi from '../services/productsApi';
 import remove from './remove';
 
 function removeOutOfStock(products /* to be fixed */) {
