@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -8,7 +8,7 @@ import ProductsList from './views/ProductsList';
 import './index.css';
 import productActionCreators from './actions';
 
-class Products extends Component {
+/* class Products extends Component {
     render() {
         const { data, categories, toggleOutOfStock, remove, removeOutOfStock, addNew, load } = this.props;
         return (
@@ -27,20 +27,49 @@ class Products extends Component {
             </div>
         )
     }
-}
+} */
 
-function mapStateToProps(storeState){
+const Products = ({ data, categories, toggleOutOfStock, remove, removeOutOfStock, addNew, load }) => (
+    <div>
+        <h3>Products</h3>
+        <input type="button" value="LOAD PRODUCTS" onClick={load}/>
+        <hr />
+        <ProductStats products={data} />
+        <ProductEditor addNew={addNew} categories={categories} />
+        <ProductsList
+            products={data}
+            toggleOutOfStock={toggleOutOfStock}
+            remove={remove}
+            removeOutOfStock={removeOutOfStock}
+        />
+    </div>
+);
+    
+
+/* function mapStateToProps(storeState){
     const products = storeState.products,
         categories = storeState.categories.categoryList,
         selectedCatgory = storeState.categories.selectedCategory;
     if (selectedCatgory !== '')
         return { data : products.filter(p => p.category === selectedCatgory), categories };
     return { data : products, categories};
+} */
+
+const mapStateToProps = ({ products, categories}) => {
+    const selectedCatgory = categories.selectedCategory;
+    if (selectedCatgory !== "")
+      return {
+        data: products.filter(p => p.category === selectedCatgory),
+        categories : categories.categoryList
+      };
+    return { data: products, categories : categories.categoryList };
 }
 
-function mapDispatchToProps(dispatch){
+/* function mapDispatchToProps(dispatch){
     const productActionDispatchers = bindActionCreators(productActionCreators, dispatch);
     return productActionDispatchers;
-}
+} */
+
+const mapDispatchToProps = dispatch => bindActionCreators(productActionCreators, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);
