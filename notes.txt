@@ -309,4 +309,22 @@ Reference
     http://bit.ly/react-videos
 
 
-    
+Assignment:
+    Implement the 'Shopping Cart'
+    Add a 'Add To Cart' button for each product
+        On clicking the button the product has to be added to the cart
+        If the product is already in the cart, increment the count
+        Save the cart info in the server whenever a product is added/removed from the cart
+    Add a menu 'Cart'
+        This menu has to display the number of items in the cart ( such as 'Cart[3]')
+        On click of this menu, display the contents of the cart
+        Add a 'Remove' button for each item and remove the item when the button is clicked
+
+Evaluation Parameters
+    Implementation
+    Modularity
+    Naming Conventions
+    Bugs
+    Comments
+
+Deadline - EOD 11-Nov-2020
