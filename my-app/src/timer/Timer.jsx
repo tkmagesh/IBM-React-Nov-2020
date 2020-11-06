@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 
-class Timer extends Component {
+/* class Timer extends React.Component {
     state = {
         currentTime: new Date().toTimeString()
     }
@@ -27,6 +27,32 @@ class Timer extends Component {
             </div>
         );
     }
+} */
+
+const Timer = () => {
+
+    const [currentTime, setCurrentTime] = useState(new Date().toTimeString());
+
+    useEffect(() => {
+        //this function is executed with the component is mounted
+        console.log("timer is mounted");
+        const timerId = setInterval(() => {
+            setCurrentTime(new Date().toTimeString());
+        },1000);
+        return () => {
+            //this function is executed when the component is unmounted
+            console.log('timer is unmounted');
+            if (timerId)
+                clearInterval(timerId);
+        };
+    }, []);
+
+    return (
+      <div>
+        <span> Time : </span>
+        <span>{currentTime}</span>
+      </div>
+    );
 }
 
 export default Timer;
