@@ -227,3 +227,20 @@ ES6 Modules
 ./store
     ./index.js
 ./index.js
+
+
+There are only two places where you have access to the whole store state
+    1. mapStateToProps
+            Use this if you want to have access to the data in the store state for presentation
+    2. 
+
+
+Container Component / Smart Component
+    interface with the redux infrastructure to get the data and create action dispatchers
+    and cascade them to the child components
+    ex, Products, Categories
+
+Presentation Component / Dumb Component
+    Receive data & action dispatchers from the parent component
+
+Best Practice : Fewer container and any number of presentation components

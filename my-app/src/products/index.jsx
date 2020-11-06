@@ -10,13 +10,13 @@ import productActionCreators from './actions';
 
 class Products extends Component {
     render() {
-        const { data, toggleOutOfStock, remove, removeOutOfStock, addNew } = this.props;
+        const { data, categories, toggleOutOfStock, remove, removeOutOfStock, addNew } = this.props;
         return (
             <div>
                 <h3>Products</h3>
                 <hr />
                 <ProductStats products={data} />
-                <ProductEditor addNew={addNew} />
+                <ProductEditor addNew={addNew} categories={categories} />
                 <ProductsList
                     products={data}
                     toggleOutOfStock={toggleOutOfStock}
@@ -29,8 +29,9 @@ class Products extends Component {
 }
 
 function mapStateToProps(storeState){
-    const products = storeState.products;
-    return { data : products };
+    const products = storeState.products,
+        categories = storeState.categories;
+    return { data : products, categories };
 }
 
 function mapDispatchToProps(dispatch){

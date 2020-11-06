@@ -4,15 +4,17 @@ class ProductEditor extends Component {
     state = {
         name: '',
         description: '',
-        price: 0
+        price: 0,
+        category : 0
     };
 
     onAddNewProductClick = () => {
         const { addNew } = this.props,
-            { name, description, price } = this.state;
-        addNew(name, description, price);
+            { name, description, price, category } = this.state;
+        addNew(name, description, price, category);
     };
     render() {
+      const { categories } = this.props;
         return (
           <section className="edit">
             <div className="field">
@@ -42,10 +44,9 @@ class ProductEditor extends Component {
             </div>
             <div className="field">
               <label htmlFor="">Category</label>
-              <select>
-                <option></option>
-                <option></option>
-                <option></option>
+              <select onChange={evt => this.setState({ category : evt.target.value})}>
+                <option value=""> --- select --- </option>
+                { categories.map(category => (<option key={category.id}>{category.name}</option>)) }
               </select>
             </div>
             <div className="field">

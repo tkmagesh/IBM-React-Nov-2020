@@ -3,13 +3,13 @@ import React, { Component } from 'react';
 class ProductItem extends Component {
     render() {
         const { product, toggleOutOfStock, remove } = this.props,
-            { id, name, description, price, isOutOfStock } = product;
+            { id, name, description, price, isOutOfStock, category } = product;
         return (
             <li>
                 <span className={'name ' + (isOutOfStock ? 'outofstock' : '')}>
                     {name}
                 </span>
-                <span> [Category] </span>
+                <span> {category} </span>
                 <div>{description}</div>
                 <div className="price">Rs.{price}</div>
                 <input type="checkbox"
