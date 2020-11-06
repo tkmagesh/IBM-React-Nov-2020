@@ -244,3 +244,19 @@ Presentation Component / Dumb Component
     Receive data & action dispatchers from the parent component
 
 Best Practice : Fewer container and any number of presentation components
+
+Async Operation
+    - That will complete in future and one doesnt wait for its completion
+
+Promise
+    - An object designed to hold the result of an async operation and make the result available whenever it is needed
+
+    - Other ways of handling async operations
+        callbacks
+        events
+        async await
+        generators
+        observables
+        
+axios
+    - promise based server communication library

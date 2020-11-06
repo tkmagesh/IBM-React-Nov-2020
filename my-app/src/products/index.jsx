@@ -10,10 +10,11 @@ import productActionCreators from './actions';
 
 class Products extends Component {
     render() {
-        const { data, categories, toggleOutOfStock, remove, removeOutOfStock, addNew } = this.props;
+        const { data, categories, toggleOutOfStock, remove, removeOutOfStock, addNew, load } = this.props;
         return (
             <div>
                 <h3>Products</h3>
+                <input type="button" value="LOAD PRODUCTS" onClick={load}/>
                 <hr />
                 <ProductStats products={data} />
                 <ProductEditor addNew={addNew} categories={categories} />
@@ -32,7 +33,9 @@ function mapStateToProps(storeState){
     const products = storeState.products,
         categories = storeState.categories.categoryList,
         selectedCatgory = storeState.categories.selectedCategory;
-    return { data : products.filter(p => p.category === selectedCatgory), categories };
+    if (selectedCatgory !== '')
+        return { data : products.filter(p => p.category === selectedCatgory), categories };
+    return { data : products, categories};
 }
 
 function mapDispatchToProps(dispatch){
