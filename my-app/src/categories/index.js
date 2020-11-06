@@ -41,6 +41,11 @@ import './index.css';
 
 const Categories = ({ data, selected, setSelected, addNew }) => {
     const txtNewCategoryNameRef = useRef();
+    const onAddNewClick = () => {
+        addNew(txtNewCategoryNameRef.current.value);
+        txtNewCategoryNameRef.current.value = '';
+        txtNewCategoryNameRef.current.focus();
+    }
     return(
         <div>
             <h3>Categores</h3>
@@ -50,7 +55,7 @@ const Categories = ({ data, selected, setSelected, addNew }) => {
             <input 
                 type="button" 
                 value="Add New" 
-                onClick={() => addNew(txtNewCategoryNameRef.current.value)} />
+                onClick={onAddNewClick} />
             <ol>
                 { 
                     data.map(category => (
